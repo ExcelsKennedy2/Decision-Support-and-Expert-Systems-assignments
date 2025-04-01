@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Information System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            /* margin-top: 50px; */
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            width: 250px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #courseInfo {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 50px;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="bmi.html">BMI</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="loan.html">Loan Eligibility</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="course.html">Check courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="book_management.html">Book Management</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="animal_classification_network.html">Animal Classification</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="diagnosis.html">Diagnosis</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="university_system.html">University System</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="symptoms.html">Symptoms</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <h2>Course Information System</h2>
+
+    <label>Course Code:</label>
+    <input type="text" id="courseCode" placeholder="Enter course code"><br>
+
+    <label>Course Title:</label>
+    <input type="text" id="courseTitle" placeholder="Enter course title"><br>
+
+    <label>Instructor:</label>
+    <input type="text" id="instructor" placeholder="Enter instructor name"><br>
+
+    <label>Credit Hours:</label>
+    <input type="number" id="creditHours" placeholder="Enter credit hours"><br>
+
+    <label>Prerequisites (comma-separated):</label>
+    <input type="text" id="prerequisites" placeholder="Enter prerequisites"><br>
+
+    <button onclick="createCourse()">Create Course</button>
+
+    <h3>Course Details</h3>
+    <div id="courseInfo"></div>
+
+    <h3>Update Course Attribute</h3>
+    <label>Attribute:</label>
+    <select id="attributeKey">
+        <option value="Course Code">Course Code</option>
+        <option value="Course Title">Course Title</option>
+        <option value="Instructor">Instructor</option>
+        <option value="Credit Hours">Credit Hours</option>
+        <option value="Prerequisites">Prerequisites</option>
+    </select><br>
+
+    <label>New Value:</label>
+    <input type="text" id="attributeValue" placeholder="Enter new value"><br>
+
+    <button onclick="updateCourse()">Update Course</button>
+
+    <script>
+        let course = {};
+
+        function createCourse() {
+            // Get values from input fields
+            course = {
+                "Course Code": document.getElementById("courseCode").value,
+                "Course Title": document.getElementById("courseTitle").value,
+                "Instructor": document.getElementById("instructor").value,
+                "Credit Hours": document.getElementById("creditHours").value,
+                "Prerequisites": document.getElementById("prerequisites").value.split(",").map(p => p.trim())
+            };
+
+            displayCourseInfo();
+        }
+
+        function displayCourseInfo() {
+            let info = "<ul>";
+            for (let key in course) {
+                info += `<li><strong>${key}:</strong> ${Array.isArray(course[key]) ? course[key].join(", ") : course[key]}</li>`;
+            }
+            info += "</ul>";
+            document.getElementById("courseInfo").innerHTML = info;
+        }
+
+        function updateCourse() {
+            let key = document.getElementById("attributeKey").value;
+            let value = document.getElementById("attributeValue").value;
+
+            // Convert value properly for prerequisites
+            if (key === "Prerequisites") {
+                value = value.split(",").map(p => p.trim());
+            }
+
+            course[key] = value;
+            displayCourseInfo();
+        }
+    </script>
+<script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

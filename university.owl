@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/university.owl"
+         xmlns="http://example.org/university.owl#">
+
+<owl:Ontology rdf:about="http://example.org/university.owl"/>
+
+<owl:ObjectProperty rdf:about="#hasFaculty">
+  <rdfs:domain rdf:resource="#University"/>
+  <rdfs:range rdf:resource="#Faculty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasDepartment">
+  <rdfs:domain rdf:resource="#Faculty"/>
+  <rdfs:range rdf:resource="#Department"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#offersCourse">
+  <rdfs:domain rdf:resource="#Department"/>
+  <rdfs:range rdf:resource="#Course"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#University">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Faculty">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Department">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Course">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#Rongo_University">
+  <rdf:type rdf:resource="#University"/>
+  <hasFaculty rdf:resource="#Faculty_of_Science"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Faculty_of_Science">
+  <rdf:type rdf:resource="#Faculty"/>
+  <hasDepartment rdf:resource="#Department_of_Computer_Science"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Department_of_Computer_Science">
+  <rdf:type rdf:resource="#Department"/>
+  <offersCourse rdf:resource="#AI_for_Peace_Studies"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#AI_for_Peace_Studies">
+  <rdf:type rdf:resource="#Course"/>
+</owl:NamedIndividual>
+
+
+</rdf:RDF>
